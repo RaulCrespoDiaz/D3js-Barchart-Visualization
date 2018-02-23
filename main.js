@@ -8,7 +8,7 @@
 let margin = null,
     width = null,
     height = null;
-    separation= null; //RCD
+    
 
 let svg = null;
 let x, y = null; // scales
@@ -62,7 +62,8 @@ function setupYScale()
     .rangeRound([0, height])
     .domain(totalSales.map(function(d, i) {
       return d.product;
-    }));
+    }))
+    .padding(0.1)
 }
 
 function appendXAxis() {
@@ -103,6 +104,7 @@ function appendChartBars()
         return y(d.product);
       })
       .attr('height', y.bandwidth)
+      //.attr('height', 25)
       .attr('width', function(d, i) {
         return x(d.sales);
       })
