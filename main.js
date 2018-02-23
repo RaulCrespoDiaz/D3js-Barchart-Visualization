@@ -8,6 +8,7 @@
 let margin = null,
     width = null,
     height = null;
+    separation= null; //RCD
 
 let svg = null;
 let x, y = null; // scales
@@ -104,5 +105,7 @@ function appendChartBars()
       .attr('height', y.bandwidth)
       .attr('width', function(d, i) {
         return x(d.sales);
-      });
+      })
+      .style('fill', function(d, i) {
+        return (d.color)});
 }
