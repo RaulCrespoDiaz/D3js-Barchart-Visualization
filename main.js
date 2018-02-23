@@ -20,13 +20,12 @@ setupYScale();
 appendXAxis();
 appendYAxis();
 appendChartBars();
-//rotarTodo("body");
 
 // 1. let's start by selecting the SVG Node
 function setupCanvasSize() {
-  margin = {top: 0, left: 80, bottom: 20, right: 30};
+  margin = {top: 50, left: 80, bottom: 100, right: 30};
   width = 960 - margin.left - margin.right;
-  height = 120 - margin.top - margin.bottom;
+  height = 800 - margin.top - margin.bottom;
 }
 
 function appendSvg(domElement) {
@@ -35,7 +34,8 @@ function appendSvg(domElement) {
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform",`translate(${margin.left}, ${margin.top})`);
-  svg.attr("transform", "rotate(-90)")
+
+  //svg.attr("transform", "rotate(-90)")
 
 }
 
@@ -43,14 +43,14 @@ function appendSvg(domElement) {
 // pixels
 // in this case we map the canvas range 0..350, to 0...maxSales
 // domain == data (data from 0 to maxSales) boundaries
-function setupXScale()
+function setupYScale()
 {
   var maxSales = d3.max(totalSales, function(d, i) {
     return d.sales;
   });
 
-  x = d3.scaleLinear()
-    .range([0, width])
+  y = d3.scaleLinear()
+    .range([height,0])
     .domain([0, maxSales]);
 
 }
@@ -58,10 +58,10 @@ function setupXScale()
 // Now we don't have a linear range of values, we have a discrete
 // range of values (one per product)
 // Here we are generating an array of product names
-function setupYScale()
+function setupXScale()
 {
-  y = d3.scaleBand()
-    .rangeRound([0, height])
+  x = d3.scaleBand()
+    .rangeRound([0, width])
     .domain(totalSales.map(function(d, i) {
       return d.product;
     }))
@@ -79,7 +79,7 @@ function appendXAxis() {
           "translate(" + (width/2) + " ," + 
                          (height + margin.top + 20) + ")")
     .style("text-anchor", "middle")
-    .text("Value");
+    .text("Products");
 }
 
 function appendYAxis() {
@@ -92,7 +92,7 @@ function appendYAxis() {
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Products");      
+    .text("Values");      
 }
 
 function appendChartBars()
@@ -114,31 +114,24 @@ function appendChartBars()
     //    width: Now that we have the mapping previously done (linear)
     //           we just pass the sales and use the X axis conversion to
     //           get the right value
+
     newRects.append('rect')
-      .attr('x', x(0))
-      .attr('y', function(d, i) {
-        return y(d.product);
-      })
-      .attr('height', y.bandwidth)
-      //.attr('height', 25)
-      .attr('width', function(d, i) {
-        return x(d.sales);
-      })
-      .style('fill', function(d, i) {
-        return (d.color)});
+      .attr('x', function(d, i) {return x(d.product);})
+      .attr('y', function(d) {return y(d.sales);})     
+      .attr('height', function(d, i) {return (height - y(d.sales));})
+      .attr('width', x.bandwidth)
+      .style('fill', function(d, i) {return (d.color)});
+
+    //newRects.append('rect')
+    //    .attr('x', x(0))
+    //    .attr('y', function(d, i) {
+    //      return y(d.product);
+    //    })
+    //    .attr('height', y.bandwidth)
+    //      .attr('width', function(d, i) {
+    //      return x(d.sales);
+    //    })
+    //    .style('fill', function(d, i) {
+    //      return (d.color)});    
         
 }
-
-function rotarTodo(domElemen)
-{
-  svg = d3.select(domElement).append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform",`translate(${margin.left}, ${margin.top})`);
-}
-
-  //chart.xAxis
-    //        .axisLabel("Time (s)")
-      //      .tickFormat(d3.format(',.1f'))
-        //    .staggerLabels(true)
