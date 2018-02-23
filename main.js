@@ -20,6 +20,7 @@ setupYScale();
 appendXAxis();
 appendYAxis();
 appendChartBars();
+//rotarTodo("body");
 
 // 1. let's start by selecting the SVG Node
 function setupCanvasSize() {
@@ -34,6 +35,7 @@ function appendSvg(domElement) {
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform",`translate(${margin.left}, ${margin.top})`);
+  svg.attr("transform", "rotate(-90)")
 
 }
 
@@ -63,20 +65,34 @@ function setupYScale()
     .domain(totalSales.map(function(d, i) {
       return d.product;
     }))
-    .padding(0.1)
+    .padding(0.1) //add a padding
 }
 
 function appendXAxis() {
   // Add the X Axis
   svg.append("g")
     .attr("transform",`translate(0, ${height})`)
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x))
+    
+  svg.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + 
+                         (height + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .text("Value");
 }
 
 function appendYAxis() {
   // Add the Y Axis
   svg.append("g")
-  .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y))
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Products");      
 }
 
 function appendChartBars()
@@ -110,4 +126,19 @@ function appendChartBars()
       })
       .style('fill', function(d, i) {
         return (d.color)});
+        
 }
+
+function rotarTodo(domElemen)
+{
+  svg = d3.select(domElement).append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform",`translate(${margin.left}, ${margin.top})`);
+}
+
+  //chart.xAxis
+    //        .axisLabel("Time (s)")
+      //      .tickFormat(d3.format(',.1f'))
+        //    .staggerLabels(true)
