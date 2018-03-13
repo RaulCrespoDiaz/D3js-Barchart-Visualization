@@ -331,7 +331,6 @@ function appendChartBars(totalSales, firstPaint)
 
 ```
 
-and this is the result the final result
-
-![Bar Color](./pictures/Exercise1_final_result.png "Chart Color")
+and this is the result the final result:
+![Bar Color](./pictures/Exercise1_final_result.png "Chart Color")![Bar Color](./pictures/Exercise1_final_result_2.png "Chart Color")
 
