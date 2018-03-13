@@ -26,43 +26,29 @@ function setupXScale(totalSales)
 
 ```
 
-###2) Adding some color to each bar, based on the product Id ?
+### 2) Adding some color to each bar, based on the product Id
 
-Some tips:
+I add a new field to  data.json called 'color'
 
-- We can treat product category as an ordinal.
-
-- We can create a function that returns a color based on
-an existing d3 SchemeCategory
-
-```javascript
-// helper that returns a color based on an ID
-var barColor = d3.scaleOrdinal(d3.schemeCategory10);
+```json
+[{ "product": "Pepinos", "sales": 6 , "color": "blue"},
+{ "product": "Tomates", "sales": 2 , "color": "red"},
+{ "product": "Pimientos", "sales": 10 , "color": "yellow"}]
 ```
-
-The React it self has an attribute called filled, we can
-attach to it a _function(d)_ extract from it the current product
-and invoke the color function we have previously created.
 
 **Solution**
 
 ```diff
-+ // helper that returns a color based on an ID
-+ var barColor = d3.scaleOrdinal(d3.schemeCategory10);
-
-
-newRects.append('rect')
-  .attr('x', x(0))
-  .attr('y', function(d, i) {
-    return y(d.product);
-  })
-  .attr('height', y.bandwidth)
-  .attr('width', function(d, i) {
-    return x(d.sales);
-  })
-+  .attr('fill', function(d) {
-+    return barColor(d.product);
-+  });
+Barchart=newRects.append('rect')
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide)  
+        .attr('x', function(d, i) {return x(d.product);})
+        .attr('y', function(d) {return y(d.sales);})  
+        .attr('width', x.bandwidth)
+        .attr('height', function(d, i) {return (height - y(d.sales));})
+++      .style('fill', function(d, i) {return (d.color)})
+        .style('stroke',"black")
+        .attr("class","bar") 
 ```
 
 ###4) Let's rotate 90º the bar chart, we want it to show it like:
