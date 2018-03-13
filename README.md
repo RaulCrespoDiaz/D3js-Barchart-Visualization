@@ -38,20 +38,67 @@ I add a new field to  data.json called 'color'
 
 **Solution**
 
+and add .style to the rectangle with the color in the same way we use 'product' and 'sales'
+
 ```diff
 Barchart=newRects.append('rect')
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide)  
         .attr('x', function(d, i) {return x(d.product);})
         .attr('y', function(d) {return y(d.sales);})  
         .attr('width', x.bandwidth)
         .attr('height', function(d, i) {return (height - y(d.sales));})
 ++      .style('fill', function(d, i) {return (d.color)})
-        .style('stroke',"black")
-        .attr("class","bar") 
 ```
 
-###4) Let's rotate 90º the bar chart, we want it to show it like:
+This is the result
+
+![Bar Padding](./pictures/02_Chart_Bar_Padding_colored.png "Chart Padding")
+
+### 3) Adding a legend
+
+**Solution**
+
+Let's start by adding a new style for the new legend (styles.css)
+
+```css
+.legend {
+  padding: 5px;
+  font: 15px sans-serif;
+}
+```
+
+```javascript
+function appendLegend(totalSales){
+
+  legend = svg.append('g')
+	  .attr('class', 'legend')
+	  .attr('height', 100)
+	  .attr('width', 100)
+    .attr('transform',
+       `translate(60,0)`)
+
+  legend.selectAll('rect')
+    .data(totalSales)
+    .enter()
+    .append('rect')
+	  .attr('x', width - 65)
+    .attr('y', (d, i)=> i *  20)
+	  .attr('width', 10)
+	  .attr('height', 10)
+    .style('fill', (d)=> d.color)
+    .style('stroke',"black")
+      
+  legend.selectAll('text')
+    .data(totalSales)
+    .enter()
+    .append('text')
+	  .attr('x', width - 52)
+    .attr('y',(d, i)=> i *  20 + 9)
+	  .text((d)=> d.product);
+}
+```
+
+
+### 4) Let's rotate 90º the bar chart, we want it to show it like:
 
 ![Vertical](./pictures/02_vertical.png "Chart Vertical")
 
