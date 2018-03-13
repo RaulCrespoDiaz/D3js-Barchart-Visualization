@@ -14,18 +14,15 @@ This is the target
 **Solution**
 
 ```diff
-newRects.append('rect')
-  .attr('x', x(0))
-  .attr('y', function(d, i) {
-    return y(d.product);
-  })
--  .attr('height', y.bandwidth)
-+  .attr('height', function(d, i) {
-+    return y.bandwidth() - 5;
-+  })
-  .attr('width', function(d, i) {
-    return x(d.sales);
-  });
+function setupXScale(totalSales)
+{
+  x = d3.scaleBand()
+    .rangeRound([0, width])
+    .domain(totalSales.map(function(d, i) {
+      return d.product;
+    }))
++    .padding(0.1) //add a padding
+}
 
 ```
 
