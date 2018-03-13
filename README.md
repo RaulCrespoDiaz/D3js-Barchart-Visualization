@@ -208,3 +208,7 @@ This is the result
 
 ![Bar Leyend](02_Chart_Bar_Paddin_colored_with legend.PNG "Chart Leyend")
 
+This is the result
+
+![Bar Color](./pictures/02_Chart_Bar_Paddin_colored.png "Chart Color")
+
