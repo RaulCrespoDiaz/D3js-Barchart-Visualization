@@ -1,10 +1,3 @@
-
-// Let's start using ES6
-// And let's organize the code following clean code concepts
-// Later one we will complete a version using imports + webpack
-
-// Isolated data array to a different file
-
 let margin = null,
     width = null,
     height = null;
@@ -47,13 +40,14 @@ function refreshChart(ftime) {
   
   }
 
-// 1. let's start by selecting the SVG Node
 function setupCanvasSize() {
   margin = {top: 50, left: 80, bottom: 100, right: 80};
   width = 700 - margin.left - margin.right;
   height = 550 - margin.top - margin.bottom;
 }
 
+
+// 1. let's start by selecting the SVG Node
 function appendSvg(domElement) {
   svg = d3.select(domElement).append("svg")
               .attr("width", width + margin.left + margin.right)
@@ -62,10 +56,9 @@ function appendSvg(domElement) {
               .attr("transform",`translate(${margin.left}, ${margin.top})`);
 }
 
-// Now on the X axis we want to map totalSales values to
+// Now on the Y axis we want to map totalSales values to
 // pixels
-// in this case we map the canvas range 0..350, to 0...maxSales
-// domain == data (data from 0 to maxSales) boundaries
+
 function setupYScale(totalSales)
 {
   var maxSales = d3.max(totalSales, function(d, i) {
@@ -78,9 +71,9 @@ function setupYScale(totalSales)
 
 }
 
-// Now we don't have a linear range of values, we have a discrete
+// On the X axis we don't have a linear range of values, we have a discrete
 // range of values (one per product)
-// Here we are generating an array of product names
+
 function setupXScale(totalSales)
 {
   x = d3.scaleBand()
@@ -128,7 +121,7 @@ function appendChartBars(totalSales, firstPaint)
   
   svg.call(tip);
 
-  // 2. Now let's select all the rectangles inside that svg
+  //  Now let's select all the rectangles inside that svg
   // (right now is empty)
   var rects = svg.selectAll('rect')
     .data(totalSales);
@@ -137,15 +130,6 @@ function appendChartBars(totalSales, firstPaint)
     var newRects = rects.enter();
 
     // Let's append a new Rectangles
-    // UpperCorner:
-    //    Starting x position, the start from the axis
-    //    Starting y position, where the product starts on the y scale
-    // React width and height:
-    //    height: the space assign for each entry (product) on the Y axis
-    //    width: Now that we have the mapping previously done (linear)
-    //           we just pass the sales and use the X axis conversion to
-    //           get the right value
-
     if (firstPaint==true)
     {
       Barchart=newRects.append('rect')
@@ -192,6 +176,7 @@ function appendChartBars(totalSales, firstPaint)
       
 }
 
+ //  Now let's add a Legend
 function appendLegend(totalSales){
 
   legend = svg.append('g')
@@ -206,10 +191,10 @@ function appendLegend(totalSales){
     .enter()
     .append('rect')
 	  .attr('x', width - 65)
-    .attr('y', (d, i)=> i *  20)
+    .attr('y', function(d, i){ return i *  20})
 	  .attr('width', 10)
 	  .attr('height', 10)
-    .style('fill', (d)=> d.color)
+    .style('fill', function(d){return d.color})
     .style('stroke',"black")
       
   legend.selectAll('text')
@@ -217,6 +202,6 @@ function appendLegend(totalSales){
     .enter()
     .append('text')
 	  .attr('x', width - 52)
-    .attr('y',(d, i)=> i *  20 + 9)
+    .attr('y',function(d, i) { return i *  20 + 10})
 	  .text((d)=> d.product);
 }
