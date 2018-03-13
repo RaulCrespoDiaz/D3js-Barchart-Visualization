@@ -1,7 +1,7 @@
 # Visualitation Mandatory Exercise
-## The target of this script is to display a barchart usisng the refactor sample make in class
+## The target of this script is to display a barchart using the refactor sample make in class
 
-1) Add a padding between each of the chart bars.
+###1) Add a padding between each of the chart bars.
 
 ![No padding](./pictures/02_Chart_Original.png "Chart Original")
 ![Bar Padding](./pictures/02_Chart_Bar_Padding.png "Chart Padding")
@@ -24,7 +24,7 @@ newRects.append('rect')
 
 ```
 
-2) What about adding some color to each bar, based on the product Id ?
+###2) Adding some color to each bar, based on the product Id ?
 
 Some tips:
 
@@ -63,7 +63,7 @@ newRects.append('rect')
 +  });
 ```
 
-3) Let's rotate 90º the bar chart, we want it to show it like:
+###4) Let's rotate 90º the bar chart, we want it to show it like:
 
 ![Vertical](./pictures/02_vertical.png "Chart Vertical")
 
@@ -221,59 +221,4 @@ function appendLineCharts()
 }
 ```
 
-# 02 Charts / 06 Pie
 
-4) Create a Doughnut like chart.
-
-![Doughnut](./pictures/06_pie.png "Doughnut")
-
-You only need to play with the innerRadius property:
-
-```javascript
-  // Pie chart size
-  var arc = d3.arc()
-    .innerRadius(20)
-    .outerRadius(50);
-```
-
-5) Make the pie chart scale and take all the available canvas space, plus include margin for legend.
-
-```diff
-function setupCanvasSize() {
-  margin = {top: 0, left: 80, bottom: 20, right: 30};
-+  width = 760 - margin.left - margin.right;
-+  height = 660 - margin.top - margin.bottom;
-}
-
-function appendPieChart()
-{
-  // Where to get the measure data
-  var pie = d3.pie()
-    .value(function(d) { return d.sales })
-
-  // Calculate Arcs
-  var slices = pie(totalSales);
-
-  // Pie chart size
-  var arc = d3.arc()
-    .innerRadius(0)
-+    .outerRadius(height / 2);
-
-+  var positionX = width / 2;
-+  var positionY = height / 2;
-
-  // Draw the pie
-  svg.selectAll('path.slice')
-    .data(slices)
-      .enter()        
-        .append('path')
-          .attr('class', 'slice')
-          .attr('d', arc)
-          .attr('fill', function(d) {
-            return color(d.data.product);
-          })
-+          .attr("transform", `translate(${positionX}, ${positionY})`)
-          ;
-}
-
-```
