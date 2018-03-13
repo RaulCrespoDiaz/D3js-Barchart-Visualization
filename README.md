@@ -208,9 +208,9 @@ function appendLegend(totalSales){
 
 This is the result
 
-![Bar Color](./pictures/02_Chart_Bar_Paddin_colored_with legend.png "Chart Color")
+![Bar Colored](./pictures/02_Chart_Bar_Paddin_colored_with legend.png "Chart Colored")
 
-### 5) Some improvementes
+### 5) Some improvements
 
 #### 5.1) Read data from a json and Refresh the chartbart when we change any data in the json file
 
@@ -325,5 +325,5 @@ function appendChartBars(totalSales, firstPaint)
 
 and this is the result the final result
 
-![Bar Color](./pictures/Exercise1_finalresult.png "Chart Color")a
+![Bar Color](./pictures/Exercise1_finalresult.png "Chart Color")
 
