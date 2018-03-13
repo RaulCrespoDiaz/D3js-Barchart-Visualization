@@ -1,7 +1,7 @@
 # Visualitation Mandatory Exercise
 ## The target of this script is to display a barchart using the refactor sample make in class
 
-###1) Add a padding between each of the chart bars.
+### 1) Add a padding between each of the chart bars.
 
 ![No padding](./pictures/02_Chart_Original.png "Chart Original")
 ![Bar Padding](./pictures/02_Chart_Bar_Padding.png "Chart Padding")
