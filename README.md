@@ -163,7 +163,6 @@ function appendYAxis(totalSales) {
 ++    .text("Values");      
 }
 ```
-![Bar Color](./pictures/02_Chart_Bar_Paddin_colored_with legend1.png "Chart Color")
 
 #### 4.2 Adding barchart leyend
 
@@ -207,10 +206,6 @@ function appendLegend(totalSales){
 	  .text((d)=> d.product);
 }
 ```
-
-This is the result
-
-![Bar Color](./pictures/02_Chart_Bar_Paddin_colored_with legend2.png "Chart Color")
 
 ### 5) Some improvements
 
