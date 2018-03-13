@@ -1,21 +1,13 @@
 {
-  "name": "visualization_exercise1",
+  "name": "exercise1",
   "version": "1.0.0",
-  "description": "Display a barchart (start from barchart refactor sample):         - Adding space between columns.    -  Adding colors to each bar.    -  Adding a legend.    -  Showing the chart vertically.",
-  "main": "index.js",
+  "description": "",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RaulCrespoDiaz/Visualization_Exercise1.git"
+    "start": "lite-server"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RaulCrespoDiaz/Visualization_Exercise1/issues"
-  },
-  "homepage": "https://github.com/RaulCrespoDiaz/Visualization_Exercise1#readme",
   "devDependencies": {
     "lite-server": "^2.3.0"
   }
