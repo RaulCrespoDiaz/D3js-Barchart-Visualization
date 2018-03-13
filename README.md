@@ -53,52 +53,8 @@ This is the result
 
 ![Bar Color](./pictures/02_Chart_Bar_Paddin_colored.png "Chart Color")
 
-### 3) Adding a legend
 
-**Solution**
-
-Let's start by adding a new style for the new legend (styles.css)
-
-```css
-.legend {
-  padding: 5px;
-  font: 15px sans-serif;
-}
-```
-
-```javascript
-function appendLegend(totalSales){
-
-  legend = svg.append('g')
-	  .attr('class', 'legend')
-	  .attr('height', 100)
-	  .attr('width', 100)
-    .attr('transform',
-       `translate(60,0)`)
-
-  legend.selectAll('rect')
-    .data(totalSales)
-    .enter()
-    .append('rect')
-	  .attr('x', width - 65)
-    .attr('y', (d, i)=> i *  20)
-	  .attr('width', 10)
-	  .attr('height', 10)
-    .style('fill', (d)=> d.color)
-    .style('stroke',"black")
-      
-  legend.selectAll('text')
-    .data(totalSales)
-    .enter()
-    .append('text')
-	  .attr('x', width - 52)
-    .attr('y',(d, i)=> i *  20 + 9)
-	  .text((d)=> d.product);
-}
-```
-
-
-### 4) Let's rotate 90º the bar chart, we want it to show it like:
+### 3) Let's rotate 90º the bar chart, we want it to show it like:
 
 ![Vertical](./pictures/02_vertical.png "Chart Vertical")
 
@@ -203,57 +159,52 @@ function appendChartBars()
 }
 ```
 
-**There's a second solution that you can try... what about keeping the chart
-as it was original and just rotate it?**
+### 4) Adding a legend
 
-# 02 Charts / 05 Lines
+**Solution**
 
-4) Add one more line to the chart, this line will represent
-a set of expenses.
-
-![TwoLines](./pictures/03_twolines.png "Two lines")
-
-Let's start by adding a new style for the new line (styles.css)
+Let's start by adding a new style for the new legend (styles.css)
 
 ```css
-.lineB {
-fill: none;
-stroke: red;
-stroke-width: 2px;
+.legend {
+  padding: 5px;
+  font: 15px sans-serif;
+}
+```
+and we add the function **appendLegend**
+
+```javascript
+function appendLegend(totalSales){
+
+  legend = svg.append('g')
+	  .attr('class', 'legend')
+	  .attr('height', 100)
+	  .attr('width', 100)
+    .attr('transform',
+       `translate(60,0)`)
+
+  legend.selectAll('rect')
+    .data(totalSales)
+    .enter()
+    .append('rect')
+	  .attr('x', width - 65)
+    .attr('y', (d, i)=> i *  20)
+	  .attr('width', 10)
+	  .attr('height', 10)
+    .style('fill', (d)=> d.color)
+    .style('stroke',"black")
+      
+  legend.selectAll('text')
+    .data(totalSales)
+    .enter()
+    .append('text')
+	  .attr('x', width - 52)
+    .attr('y',(d, i)=> i *  20 + 9)
+	  .text((d)=> d.product);
 }
 ```
 
-We will add a new line of data
+This is the result
 
-```javascript
-var totalExpenses = [
-{ month: new Date(2016,10, 01), sales: 3500 },
-{ month: new Date(2016,11, 01), sales: 2400 },
-{ month: new Date(2016,12, 01), sales: 1500 },
-{ month: new Date(2017,1, 01), sales: 6000 },
-{ month: new Date(2017,2, 01), sales: 4500 },
-];
-```
-
-> For the sake of simplicity we will keep the same dates (as an additional excercise, what should
-you take care if we have different date ranges? we should combine min and max for the X timeline).
-
-Next step let's add the new line
-
-```javascript
-function appendLineCharts()
-{
-  // (...)
-  var expenseline = d3.line()
-                    .x(function(d) { return x(d.month); })
-                    .y(function(d) { return y(d.expense); });
-
-  // Add the valueline path.
-  svg.append("path")
-  .data([totalExpenses])
-  .attr("class", "lineB")
-  .attr("d", expenseline);
-}
-```
-
+![Bar Leyend](02_Chart_Bar_Paddin_colored_with legend.PNG "Chart Leyend")
 
