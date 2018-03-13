@@ -50,4 +50,9 @@ body {
   font: 15px sans-serif;
 }
 
+.legend rect{
+  fill:white;
+  stroke:black;
+}
+
 

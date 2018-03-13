@@ -170,40 +170,51 @@ Let's start by adding a new style for the new legend (styles.css)
 
 ```css
 .legend {
-  padding: 5px;
   font: 15px sans-serif;
+}
+
+.legend rect{
+  fill:white;
+  stroke:black;
 }
 ```
 and we add the function **appendLegend**
 
 ```javascript
+//  Now let's add a Legend
 function appendLegend(totalSales){
 
   legend = svg.append('g')
 	  .attr('class', 'legend')
 	  .attr('height', 100)
-	  .attr('width', 100)
-    .attr('transform',
-       `translate(60,0)`)
-
+    .attr('width', 100)
+  
   legend.selectAll('rect')
     .data(totalSales)
     .enter()
     .append('rect')
-	  .attr('x', width - 65)
-    .attr('y', (d, i)=> i *  20)
-	  .attr('width', 10)
-	  .attr('height', 10)
-    .style('fill', (d)=> d.color)
+	  .attr('x', width-10)
+    .attr('y', -10)
+	  .attr('width', 90)
+	  .attr('height', (function(d, i){ return 20+(i *  20)}))  
+
+  legend.selectAll('circle')
+    .data(totalSales)
+    .enter()
+    .append('circle')
+	  .attr('cx', width)
+    .attr('cy', function(d, i){ return i *  20})
+	  .attr('r', 5)
+	  .style('fill', function(d){return d.color})
     .style('stroke',"black")
       
   legend.selectAll('text')
     .data(totalSales)
     .enter()
     .append('text')
-	  .attr('x', width - 52)
-    .attr('y',(d, i)=> i *  20 + 9)
-	  .text((d)=> d.product);
+	  .attr('x', width + 10)
+    .attr('y',function(d, i) { return i *  20+5})
+	  .text(function(d){ return d.product});
 }
 ```
 
