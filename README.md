@@ -51,7 +51,7 @@ Barchart=newRects.append('rect')
 
 This is the result
 
-![Bar Padding](./pictures/02_Chart_Bar_Padding_colored.png "Chart Padding")
+![Bar Color](./pictures/02_Chart_Bar_Padding_colored.png "Chart Color")
 
 ### 3) Adding a legend
 
