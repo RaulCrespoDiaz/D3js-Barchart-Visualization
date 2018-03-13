@@ -3,7 +3,9 @@
 
 ### 1) Add a padding between each of the chart bars.
 
+This is the original
 ![No padding](./pictures/02_Chart_Original.png "Chart Original")
+This is the target
 ![Bar Padding](./pictures/02_Chart_Bar_Padding.png "Chart Padding")
 
 **Solution**
