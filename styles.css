@@ -1,9 +1,9 @@
 .axis text {
-  font: 10px sans-serif;
+  font: 15px sans-serif;
 }
 
 body {
-  font: 10px sans-serif;
+  font: 15px sans-serif;
 }
 
 .axis path,
@@ -12,10 +12,6 @@ body {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-
-/* .bar {
-  fill: orange;
-} */
 
 .x.axis path {
   display: none;
@@ -51,7 +47,6 @@ body {
 }
 
 .legend {
-  padding: 5px;
   font: 15px sans-serif;
 }
 

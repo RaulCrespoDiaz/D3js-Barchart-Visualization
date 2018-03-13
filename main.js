@@ -123,55 +123,54 @@ function appendChartBars(totalSales, firstPaint)
 
   //  Now let's select all the rectangles inside that svg
   // (right now is empty)
-  var rects = svg.selectAll('rect')
-    .data(totalSales);
+  var rects = svg.selectAll('rect').data(totalSales);
 
-    // Now it's time to append to the list of Rectangles we already have
-    var newRects = rects.enter();
+  // Now it's time to append to the list of Rectangles we already have
+  var newRects = rects.enter();
 
-    // Let's append a new Rectangles
-    if (firstPaint==true)
-    {
-      Barchart=newRects.append('rect')
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)  
-      .attr('x', function(d, i) {return x(d.product);})
-      .attr('y', height)
-      .attr('width', x.bandwidth)
-      .attr('height', 0)  
+  // Let's append a new Rectangles
+  if (firstPaint==true)
+  {
+    Barchart=newRects.append('rect')
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)  
+    .attr('x', function(d, i) {return x(d.product);})
+    .attr('y', height)
+    .attr('width', x.bandwidth)
+    .attr('height', 0)  
+  
+    Barchart.transition()
+    .duration(500)
+    .delay((d, i)=> i * 50)
+    .attr('y', function(d) {return y(d.sales);})  
+    .attr("class","bar")   
+    .attr('height', function(d, i) {return (height - y(d.sales));})
+    .attr('width', x.bandwidth)
+    .style('fill', function(d, i) {return (d.color)})
+    .style('stroke',"black")
+
+    Barchart
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)  
+  }
+  else
+  {
+    Barchart=newRects.append('rect')
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)  
+    .attr('x', function(d, i) {return x(d.product);})
+    .attr('y', function(d) {return y(d.sales);})  
+    .attr('width', x.bandwidth)
+    .attr('height', function(d, i) {return (height - y(d.sales));})
+    .style('fill', function(d, i) {return (d.color)})
+    .style('stroke',"black")
+    .attr("class","bar") 
+
+    Barchart
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)  
     
-      Barchart.transition()
-      .duration(500)
-      .delay((d, i)=> i * 50)
-      .attr('y', function(d) {return y(d.sales);})  
-      .attr("class","bar")   
-      .attr('height', function(d, i) {return (height - y(d.sales));})
-      .attr('width', x.bandwidth)
-      .style('fill', function(d, i) {return (d.color)})
-      .style('stroke',"black")
-
-      Barchart
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)  
-    }
-    else
-    {
-      Barchart=newRects.append('rect')
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide)  
-        .attr('x', function(d, i) {return x(d.product);})
-        .attr('y', function(d) {return y(d.sales);})  
-        .attr('width', x.bandwidth)
-        .attr('height', function(d, i) {return (height - y(d.sales));})
-        .style('fill', function(d, i) {return (d.color)})
-        .style('stroke',"black")
-        .attr("class","bar") 
-
-        Barchart
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide)  
-      
-    }
+  }
     
       
 }
@@ -183,14 +182,12 @@ function appendLegend(totalSales){
 	  .attr('class', 'legend')
 	  .attr('height', 100)
 	  .attr('width', 100)
-    .attr('transform',
-       `translate(60,0)`)
 
   legend.selectAll('rect')
     .data(totalSales)
     .enter()
     .append('rect')
-	  .attr('x', width - 65)
+	  .attr('x', width)
     .attr('y', function(d, i){ return i *  20})
 	  .attr('width', 10)
 	  .attr('height', 10)
@@ -201,7 +198,7 @@ function appendLegend(totalSales){
     .data(totalSales)
     .enter()
     .append('text')
-	  .attr('x', width - 52)
+	  .attr('x', width + 15)
     .attr('y',function(d, i) { return i *  20 + 10})
-	  .text((d)=> d.product);
+	  .text(function(d){ return d.product});
 }
