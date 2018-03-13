@@ -163,7 +163,9 @@ function appendYAxis(totalSales) {
 ++    .text("Values");      
 }
 ```
-#### 4.1 Adding barchart leyend
+![Bar Color](./pictures/02_Chart_Bar_Paddin_colored_with legend1.png "Chart Color")
+
+#### 4.2 Adding barchart leyend
 
 Let's start by adding a new style for the new legend (styles.css)
 
@@ -208,7 +210,7 @@ function appendLegend(totalSales){
 
 This is the result
 
-![Bar Colored](./pictures/02_Chart_Bar_Paddin_colored_with legend.png "Chart Colored")
+![Bar Color](./pictures/02_Chart_Bar_Paddin_colored_with legend2.png "Chart Color")
 
 ### 5) Some improvements
 
