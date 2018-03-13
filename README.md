@@ -325,5 +325,5 @@ function appendChartBars(totalSales, firstPaint)
 
 and this is the result the final result
 
-![Bar Color](./pictures/02_Chart_Bar_Paddin_colored_with legend.png "Chart Color")a
+![Bar Color](./pictures/Exercise1_finalresult.png "Chart Color")a
 
