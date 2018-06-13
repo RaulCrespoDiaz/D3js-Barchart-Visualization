@@ -1,4 +1,4 @@
-# D3js Visualitation
+# D3js: Barchart Visualitation
 ## The target of this script is to display a barchart using the refactor sample make in class
 
 ### 1) Add a padding between each of the chart bars.
